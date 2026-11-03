@@ -62,3 +62,5 @@ Customer data must be handled securely. API keys must remain server-side, and AI
 ## Mission
 
 Help businesses understand their customers faster and make better decisions using feedback.
+
+ReviewRadar AI -Frontend Development in progress
