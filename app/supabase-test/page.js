@@ -15,13 +15,16 @@ export default function SupabaseTest() {
     try {
       const supabase = createClient();
 
-      const { error } = await supabase
-        .from("profiles")
-        .select("id")
-        .limit(1);
+      const { data, error } = await supabase.rpc(
+        "revzeno_connection_check"
+      );
 
       if (error) {
         throw error;
+      }
+
+      if (data !== true) {
+        throw new Error("Unexpected response from Supabase.");
       }
 
       setStatus("Connected successfully");
