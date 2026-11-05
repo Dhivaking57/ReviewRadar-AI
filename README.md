@@ -1,66 +1,62 @@
+RevZeno
 
-# Revzeno
+Turn Customer Voices Into Intelligence.
 
-Turn customer reviews into actionable business intelligence.
+RevZeno is an AI-powered customer intelligence platform that helps SaaS founders and e-commerce businesses understand customer feedback and make better business decisions.
 
-## Overview
+What RevZeno Does
 
-Revzeno AI is a customer feedback analysis platform designed for SaaS companies and e-commerce businesses.
+RevZeno transforms customer reviews into actionable insights.
 
-It helps businesses understand customer sentiment, identify recurring complaints, discover feature requests, and prioritize product improvements.
+Current MVP Features
 
-## Target Customers
+- Analyze customer reviews using AI
+- Identify positive, neutral and negative sentiment
+- Detect recurring customer complaints
+- Discover what customers appreciate
+- Extract customer feature requests
+- Generate executive summaries
+- Provide prioritized recommendations
+- Connect recommendations to customer evidence
 
-- SaaS founders and software companies
-- E-commerce store owners
+Target Customers
+
+- SaaS founders
+- E-commerce businesses
 - Product managers
-- Small businesses that collect customer feedback
+- Customer experience teams
 
-## Core Features
+Technology Stack
 
-- CSV upload and manual review input
-- Customer sentiment analysis
-- Recurring complaint detection
-- Positive feedback identification
-- Feature request extraction
-- Issue frequency and severity ranking
-- Evidence-linked AI recommendations
-- Downloadable PDF reports
+- Frontend: Next.js and React
+- Hosting: Vercel
+- API: Cloudflare Workers
+- Database: Supabase
+- AI: Gemini API
 
-## Planned Technology
+Product Roadmap
 
-- Frontend: React
-- Backend: Cloudflare Workers
-- Database and authentication: Supabase
-- AI analysis: Gemini API
-- Version control: GitHub
+1. Complete the MVP.
+2. Improve analysis accuracy.
+3. Build user authentication.
+4. Add customer workspaces and saved reports.
+5. Improve report generation.
+6. Test with real businesses.
+7. Launch publicly.
+8. Develop a Chrome extension.
 
-## Development Roadmap
+Business Model
 
-1. Validate the business idea.
-2. Build the minimum viable product (MVP).
-3. Implement the review analysis engine.
-4. Generate evidence-linked reports.
-5. Test with potential customers.
-6. Launch the web application.
-7. Develop a Chrome browser extension.
+Planned monetization:
 
-## Business Model
+- Free plan
+- Premium subscriptions
+- Business plans
 
-Freemium access with paid subscriptions and one-time reports.
+Initial revenue target: ₹5,000–₹10,000 per month.
 
-Initial revenue goal: ₹5,000–₹10,000 per month.
+Mission
 
-## Project Status
+Help businesses understand their customers faster and turn feedback into better products.
 
-Planning and foundation setup.
-
-## Privacy and Security
-
-Customer data must be handled securely. API keys must remain server-side, and AI-generated findings should be supported by the original review evidence.
-
-## Mission
-
-Help businesses understand their customers faster and make better decisions using feedback.
-
-Revzeno AI -Frontend Development in progress
+RevZeno — Turn Customer Voices Into Intelligence.
