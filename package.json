@@ -1,6 +1,6 @@
 
 {
-  "name": "reviewradar-ai",
+  "name": "revzeno",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -14,3 +14,4 @@
     "react-dom": "latest"
   }
 }
+
