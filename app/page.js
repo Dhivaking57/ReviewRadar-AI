@@ -4,15 +4,15 @@
 import { useState } from "react";
 
 const COLORS = {
-  blue: "#315efb",
-  green: "#16865b",
-  red: "#d64b4b",
-  orange: "#c47a20",
-  text: "#202938",
-  muted: "#758094",
-  border: "#e8ebf1",
-  surface: "#ffffff",
-  background: "#f7f8fa"
+  blue: "#6658E8",
+  green: "#159B72",
+  red: "#E05260",
+  orange: "#D99532",
+  text: "#182033",
+  muted: "#7B8498",
+  border: "#E8EAF2",
+  surface: "#FFFFFF",
+  background: "#F6F7FB"
 };
 
 function getText(value) {
@@ -43,7 +43,11 @@ function getFindingTitle(item, fallback) {
 
 function FindingList({ items, fallback }) {
   if (!items.length) {
-    return <p style={{ color: COLORS.muted }}>No findings identified.</p>;
+    return (
+      <p style={{ color: COLORS.muted }}>
+        No findings identified.
+      </p>
+    );
   }
 
   return (
@@ -57,16 +61,18 @@ function FindingList({ items, fallback }) {
           <article
             key={index}
             style={{
-              padding: 16,
+              padding: 18,
               border: `1px solid ${COLORS.border}`,
-              borderRadius: 12,
+              borderRadius: 14,
               background: COLORS.surface
             }}
           >
-            <strong style={{ color: COLORS.text }}>{title}</strong>
+            <strong style={{ color: COLORS.text }}>
+              {title}
+            </strong>
 
             {description && (
-              <p style={{ color: COLORS.muted, margin: "8px 0 0" }}>
+              <p style={{ color: COLORS.muted, margin: "8px 0 0", lineHeight: 1.7 }}>
                 {description}
               </p>
             )}
@@ -96,46 +102,23 @@ function SentimentCard({ label, count, total, color }) {
     : 0;
 
   return (
-    <article
-      style={{
-        background: COLORS.surface,
-        border: `1px solid ${COLORS.border}`,
-        borderRadius: 12,
-        padding: 18,
-        minWidth: 0
-      }}
-    >
-      <span style={{ color: COLORS.muted, fontSize: 13 }}>{label}</span>
+    <article className="sentiment-card">
+      <span className="sentiment-label">{label}</span>
 
-      <div
-        style={{
-          fontSize: 27,
-          fontWeight: 700,
-          color,
-          marginTop: 8
-        }}
-      >
+      <div className="sentiment-percentage" style={{ color }}>
         {percentage}%
       </div>
 
-      <p style={{ color: COLORS.muted, fontSize: 13, margin: "4px 0 12px" }}>
+      <p className="sentiment-count">
         {count} of {total} reviews
       </p>
 
-      <div
-        style={{
-          height: 7,
-          borderRadius: 20,
-          background: "#edf0f4",
-          overflow: "hidden"
-        }}
-      >
+      <div className="progress-track">
         <div
+          className="progress-fill"
           style={{
             width: `${percentage}%`,
-            height: "100%",
-            background: color,
-            borderRadius: 20
+            background: color
           }}
         />
       </div>
@@ -216,7 +199,7 @@ export default function Home() {
     } catch (err) {
       setError(
         err.message ||
-        "Unable to connect to ReviewRadar AI. Please try again."
+        "Unable to connect to RevZeno AI. Please try again."
       );
     } finally {
       setIsAnalyzing(false);
@@ -265,107 +248,170 @@ export default function Home() {
   const summary = getText(report.summary);
   const overallSentiment = getText(report.overall_sentiment);
 
-  const resultHeading = {
-    color: COLORS.text,
-    fontSize: 18,
-    margin: "0 0 14px"
-  };
-
   const resultCard = {
     background: COLORS.surface,
     border: `1px solid ${COLORS.border}`,
-    borderRadius: 14,
-    padding: 22,
-    marginTop: 18
+    borderRadius: 16,
+    padding: 24,
+    marginTop: 18,
+    boxShadow: "0 4px 18px rgba(25, 35, 70, 0.035)"
+  };
+
+  const resultHeading = {
+    color: COLORS.text,
+    fontSize: 17,
+    margin: "0 0 16px"
   };
 
   return (
     <main className="app-shell">
+
       <aside className="sidebar">
+
         <div className="brand">
-          <div className="brand-mark">R</div>
-          <span>ReviewRadar</span>
+          <div className="brand-mark">Z</div>
+          <span>RevZeno</span>
         </div>
 
-        <p className="nav-label">WORKSPACE</p>
+        <div className="workspace-label">WORKSPACE</div>
 
         <nav className="navigation">
-          <a className="nav-item active" href="#">Overview</a>
-          <a className="nav-item" href="#analysis">Review analysis</a>
-          <a className="nav-item" href="#insights">Insights</a>
-          <a className="nav-item" href="#recommendations">Reports</a>
+          <a className="nav-item active" href="#">
+            <span>◫</span> Overview
+          </a>
+
+          <a className="nav-item" href="#analysis">
+            <span>⌕</span> Review analysis
+          </a>
+
+          <a className="nav-item" href="#insights">
+            <span>✧</span> Insights
+          </a>
+
+          <a className="nav-item" href="#recommendations">
+            <span>▤</span> Reports
+          </a>
         </nav>
 
         <div className="sidebar-bottom">
-          <p className="nav-label">PREFERENCES</p>
-          <a className="nav-item" href="#">Settings</a>
+
+          <div className="workspace-label">PREFERENCES</div>
+
+          <a className="nav-item" href="#">
+            <span>⚙</span> Settings
+          </a>
 
           <div className="profile">
             <div className="avatar">D</div>
-            <div>
+
+            <div className="profile-details">
               <strong>My workspace</strong>
               <small>Free plan</small>
             </div>
+
+            <span className="profile-menu">···</span>
           </div>
+
         </div>
       </aside>
 
       <section className="main-content">
+
         <header className="topbar">
-          <span>Workspace / Overview</span>
+
+          <div className="breadcrumb">
+            Workspace <span>/</span> Overview
+          </div>
 
           <div className="topbar-right">
             <span className="status-dot"></span>
-            AI service connected
+            <span>AI service connected</span>
+            <div className="topbar-avatar">D</div>
           </div>
+
         </header>
 
         <div className="dashboard">
+
           <div className="welcome-row">
+
             <div>
-              <p className="eyebrow">CUSTOMER INTELLIGENCE</p>
-              <h1>Overview</h1>
+              <p className="eyebrow">
+                CUSTOMER INTELLIGENCE PLATFORM
+              </p>
+
+              <h1>Good insights start here.</h1>
+
               <p className="subtitle">
-                Understand your customers. Make better decisions.
+                Turn customer voices into smarter business decisions.
               </p>
             </div>
 
-            <span className="date-label">Your workspace</span>
+            <span className="date-label">
+              <span>✧</span> Your workspace
+            </span>
+
           </div>
 
           <div className="notice">
-            <div>
-              <strong>Your customer insights start here.</strong>
-              <p>
-                Analyze feedback to discover what customers really think.
-              </p>
+
+            <div className="notice-content">
+              <div className="notice-icon">✦</div>
+
+              <div>
+                <strong>Your customers are telling you what matters.</strong>
+
+                <p>
+                  Discover patterns, uncover problems and find opportunities
+                  hidden in customer feedback.
+                </p>
+              </div>
             </div>
-            <span className="notice-icon">↗</span>
+
+            <div className="notice-decoration">✧</div>
+
           </div>
 
           <div className="section-heading">
+
             <div>
               <h2>Workspace overview</h2>
-              <p>Your latest analysis metrics.</p>
+              <p>Your latest customer intelligence metrics.</p>
             </div>
+
+            <span className="live-label">
+              <span className="status-dot"></span> LIVE WORKSPACE
+            </span>
+
           </div>
 
           <div className="metrics-grid">
+
             <article className="metric-card">
-              <span>Reviews analyzed</span>
+              <div className="metric-top">
+                <span>Reviews analyzed</span>
+                <div className="metric-icon purple">▤</div>
+              </div>
+
               <strong>{analysis ? totalReviews : "—"}</strong>
+
               <small>
                 {analysis ? "Latest analysis" : "Awaiting feedback"}
               </small>
             </article>
 
             <article className="metric-card">
-              <span>Positive sentiment</span>
+              <div className="metric-top">
+                <span>Positive sentiment</span>
+                <div className="metric-icon green">↗</div>
+              </div>
+
               <strong>
                 {analysis && totalReviews
                   ? `${Math.round((positiveCount / totalReviews) * 100)}%`
                   : "—"}
               </strong>
+
               <small>
                 {analysis
                   ? `${positiveCount} positive reviews`
@@ -374,29 +420,44 @@ export default function Home() {
             </article>
 
             <article className="metric-card">
-              <span>Issues identified</span>
+              <div className="metric-top">
+                <span>Issues identified</span>
+                <div className="metric-icon orange">⚑</div>
+              </div>
+
               <strong>{analysis ? complaints.length : "—"}</strong>
+
               <small>
                 {analysis
                   ? "Customer complaint themes"
                   : "Awaiting feedback"}
               </small>
             </article>
+
           </div>
 
           <section className="analysis-card" id="analysis">
+
             <div className="card-heading">
+
               <div>
-                <h2>New review analysis</h2>
+                <div className="card-title-row">
+                  <div className="section-icon">✧</div>
+                  <h2>New review analysis</h2>
+                </div>
+
                 <p>
-                  Paste customer reviews below to discover actionable insights.
+                  Transform raw customer feedback into actionable intelligence.
                 </p>
               </div>
 
-              <span className="input-tag">TEXT INPUT</span>
+              <span className="input-tag">AI POWERED</span>
+
             </div>
 
-            <label htmlFor="reviews">Customer feedback</label>
+            <label htmlFor="reviews">
+              Customer feedback
+            </label>
 
             <textarea
               id="reviews"
@@ -406,10 +467,11 @@ export default function Home() {
             />
 
             <div className="input-footer">
+
               <span>
                 {reviews.length} characters ·{" "}
                 {reviews.split(/\n+/).filter((line) => line.trim()).length}
-                {" "}reviews
+                {" "}reviews · Maximum 100
               </span>
 
               <button
@@ -417,82 +479,74 @@ export default function Home() {
                 disabled={!reviews.trim() || isAnalyzing}
                 onClick={handleAnalyze}
               >
-                {isAnalyzing ? "Analyzing..." : "Analyze reviews →"}
+                {isAnalyzing
+                  ? "Analyzing..."
+                  : "Analyze reviews →"}
               </button>
+
             </div>
 
             {isAnalyzing && (
-              <div
-                role="status"
-                style={{
-                  marginTop: 18,
-                  padding: 16,
-                  background: "#eef3ff",
-                  borderRadius: 10,
-                  color: COLORS.blue
-                }}
-              >
-                <strong>ReviewRadar AI is working...</strong>
-                <p style={{ margin: "6px 0 0", fontSize: 13 }}>
-                  Analyzing sentiment, customer themes and recommendations.
-                  Please wait.
-                </p>
+              <div className="loading-panel" role="status">
+                <div className="loading-spinner"></div>
+
+                <div>
+                  <strong>RevZeno AI is working...</strong>
+                  <p>
+                    Analyzing sentiment, customer themes and recommendations.
+                    Please wait.
+                  </p>
+                </div>
               </div>
             )}
 
             {error && (
-              <div
-                role="alert"
-                style={{
-                  marginTop: 16,
-                  padding: 14,
-                  borderRadius: 10,
-                  color: COLORS.red,
-                  background: "#fff0f0",
-                  border: "1px solid #f5d2d2"
-                }}
-              >
-                {error}
+              <div className="error-panel" role="alert">
+                <strong>Analysis unsuccessful</strong>
+                <p>{error}</p>
               </div>
             )}
+
           </section>
 
           {analysis && (
-            <section id="insights" style={{ marginTop: 30 }}>
+            <section id="insights" className="results-section">
+
               <div className="section-heading">
                 <div>
                   <p className="eyebrow">AI-GENERATED REPORT</p>
-                  <h2>Customer insights</h2>
+                  <h2>Your customer intelligence report</h2>
                   <p>
                     Analysis of {totalReviews} customer reviews.
                   </p>
                 </div>
+
+                <span className="report-label">
+                  <span className="status-dot"></span> Analysis complete
+                </span>
               </div>
 
               <article style={resultCard}>
                 <h3 style={resultHeading}>Executive summary</h3>
-                <p style={{ color: COLORS.muted, lineHeight: 1.8 }}>
+
+                <p style={{ color: COLORS.muted, lineHeight: 1.9, margin: 0 }}>
                   {summary || "No summary was provided."}
                 </p>
               </article>
 
               <article style={resultCard}>
+
                 <h3 style={resultHeading}>Sentiment analysis</h3>
 
-                <p style={{ color: COLORS.muted, marginBottom: 18 }}>
+                <p style={{ color: COLORS.muted, marginBottom: 20 }}>
                   Overall sentiment:{" "}
                   <strong style={{ color: COLORS.text }}>
                     {overallSentiment || "Not available"}
                   </strong>
                 </p>
 
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(145px, 1fr))",
-                    gap: 12
-                  }}
-                >
+                <div className="sentiment-grid">
+
                   <SentimentCard
                     label="Positive"
                     count={positiveCount}
@@ -513,18 +567,21 @@ export default function Home() {
                     total={totalReviews}
                     color={COLORS.red}
                   />
+
                 </div>
 
                 {!sentimentIsComplete && (
-                  <p style={{ color: COLORS.muted, fontSize: 12, marginTop: 12 }}>
+                  <p style={{ color: COLORS.muted, fontSize: 12, marginTop: 14 }}>
                     The AI classified {totalClassified} of {totalReviews} reviews.
                     Percentages are based on the submitted review count.
                   </p>
                 )}
+
               </article>
 
               <article style={resultCard}>
                 <h3 style={resultHeading}>Customer complaints</h3>
+
                 <FindingList
                   items={complaints}
                   fallback="Customer complaint"
@@ -533,6 +590,7 @@ export default function Home() {
 
               <article style={resultCard}>
                 <h3 style={resultHeading}>What customers appreciate</h3>
+
                 <FindingList
                   items={praise}
                   fallback="Positive feedback"
@@ -541,6 +599,7 @@ export default function Home() {
 
               <article style={resultCard}>
                 <h3 style={resultHeading}>Feature requests</h3>
+
                 <FindingList
                   items={featureRequests}
                   fallback="Feature request"
@@ -548,6 +607,7 @@ export default function Home() {
               </article>
 
               <article id="recommendations" style={resultCard}>
+
                 <h3 style={resultHeading}>
                   Prioritized recommendations
                 </h3>
@@ -558,8 +618,10 @@ export default function Home() {
                   </p>
                 ) : (
                   <div style={{ display: "grid", gap: 14 }}>
+
                     {recommendations.map((item, index) => {
                       const priority = getText(item?.priority) || "Normal";
+
                       const priorityColor =
                         priority.toLowerCase() === "high"
                           ? COLORS.red
@@ -570,78 +632,63 @@ export default function Home() {
                       return (
                         <article
                           key={index}
-                          style={{
-                            padding: 18,
-                            border: `1px solid ${COLORS.border}`,
-                            borderRadius: 12,
-                            background: COLORS.surface
-                          }}
+                          className="recommendation-item"
                         >
-                          <div
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "space-between",
-                              flexWrap: "wrap",
-                              gap: 10
-                            }}
-                          >
-                            <strong style={{ color: COLORS.text }}>
+
+                          <div className="recommendation-header">
+
+                            <strong>
                               {getText(item?.title) || "Suggested action"}
                             </strong>
 
                             <span
                               style={{
                                 color: priorityColor,
-                                background: `${priorityColor}14`,
-                                borderRadius: 20,
-                                padding: "5px 10px",
-                                fontSize: 12,
-                                fontWeight: 700,
-                                textTransform: "uppercase"
+                                background: `${priorityColor}14`
                               }}
+                              className="priority-badge"
                             >
                               {priority} priority
                             </span>
+
                           </div>
 
                           {item?.description && (
-                            <p
-                              style={{
-                                color: COLORS.muted,
-                                lineHeight: 1.7,
-                                margin: "12px 0"
-                              }}
-                            >
+                            <p className="recommendation-description">
                               {getText(item.description)}
                             </p>
                           )}
 
                           {getEvidence(item?.evidence) && (
-                            <p
-                              style={{
-                                color: COLORS.muted,
-                                fontSize: 13,
-                                lineHeight: 1.6,
-                                margin: 0
-                              }}
-                            >
+                            <p className="recommendation-evidence">
                               <strong>Evidence:</strong>{" "}
                               “{getEvidence(item.evidence)}”
                             </p>
                           )}
+
                         </article>
                       );
                     })}
+
                   </div>
                 )}
+
               </article>
+
             </section>
           )}
 
           <footer className="footer">
-            ReviewRadar · Customer feedback intelligence
+            <div className="footer-brand">
+              <span className="footer-mark">Z</span>
+              RevZeno
+            </div>
+
+            <span>Turn Customer Voices Into Intelligence.</span>
+
+            <span>© 2026 RevZeno</span>
           </footer>
+
         </div>
       </section>
     </main>
