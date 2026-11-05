@@ -12,6 +12,7 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
+    "@supabase/ssr": "0.12.7"
   }
 }
 
