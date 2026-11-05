@@ -1,11 +1,11 @@
 
-# ReviewRadar AI
+# Revzeno
 
 Turn customer reviews into actionable business intelligence.
 
 ## Overview
 
-ReviewRadar AI is a customer feedback analysis platform designed for SaaS companies and e-commerce businesses.
+Revzeno AI is a customer feedback analysis platform designed for SaaS companies and e-commerce businesses.
 
 It helps businesses understand customer sentiment, identify recurring complaints, discover feature requests, and prioritize product improvements.
 
@@ -63,4 +63,4 @@ Customer data must be handled securely. API keys must remain server-side, and AI
 
 Help businesses understand their customers faster and make better decisions using feedback.
 
-ReviewRadar AI -Frontend Development in progress
+Revzeno AI -Frontend Development in progress
