@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "../../lib/supabase/client";
 
@@ -16,35 +16,6 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    async function verifyEmail() {
-      const code = new URLSearchParams(
-        window.location.search
-      ).get("code");
-
-      if (!code) return;
-
-      setLoading(true);
-
-      const { error } =
-        await supabase.auth.exchangeCodeForSession(code);
-
-      if (error) {
-        setError(error.message);
-      } else {
-        setMode("login");
-        setMessage(
-          "Email verified successfully! You can now sign in."
-        );
-        window.history.replaceState({}, "", "/login");
-      }
-
-      setLoading(false);
-    }
-
-    verifyEmail();
-  }, [supabase]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -70,7 +41,7 @@ export default function LoginPage() {
           router.refresh();
         } else {
           setMessage(
-            "Account created! Check your email and click the verification link."
+            "Account created! Check your email, confirm your address, then return here and sign in."
           );
         }
       } else {
@@ -186,7 +157,6 @@ export default function LoginPage() {
           </div>
 
           <div className="form-container">
-
             <div className="form-heading">
               <span className="form-eyebrow">
                 YOUR WORKSPACE
@@ -381,8 +351,9 @@ export default function LoginPage() {
           border-radius: 50%;
           right: -180px;
           bottom: -120px;
-          box-shadow: 0 0 0 35px rgba(255,255,255,.025),
-                      0 0 0 70px rgba(255,255,255,.02);
+          box-shadow:
+            0 0 0 35px rgba(255,255,255,.025),
+            0 0 0 70px rgba(255,255,255,.02);
           pointer-events: none;
         }
 
